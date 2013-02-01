@@ -1,25 +1,10 @@
-# Tempura
+# encoding: utf-8
 
-Tempura is a library for temperature math and conversion.
+require 'spec_helper'
 
-## Installation
+describe Tempura::Temperature do
 
-Add this line to your application's Gemfile:
-
-    gem 'tempura'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install tempura
-
-## Usage
-
-### Arithmetic
-
+  describe 'arithmetic' do
     it 'subtracts another temperature' do
       fahrenheit = Tempura::Fahrenheit.new(212)
       celsius = Tempura::Celsius.new(0)
@@ -73,51 +58,61 @@ Or install it yourself as:
       expect(result).to eq(0)
       expect(result).to be_a(Tempura::Delisle)
     end
+  end
 
-### Comparison
+  describe 'comparison' do
+    it 'compares internal value' do
+      fahrenheit = Tempura::Fahrenheit.new(212)
+      celsius = Tempura::Celsius.new(101)
+      leg = fahrenheit <=> celsius
+      expect(leg).to eq(-1)
+    end
 
-		it 'has >' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(99)
-			expect(fahrenheit > celsius).to be_true
-		end
+    describe 'comparison operators' do
+      it 'has >' do
+        fahrenheit = Tempura::Fahrenheit.new(212)
+        celsius = Tempura::Celsius.new(99)
+        expect(fahrenheit > celsius).to be_true
+      end
 
-		it 'has <' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(101)
-			expect(fahrenheit < celsius).to be_true
-		end
+      it 'has <' do
+        fahrenheit = Tempura::Fahrenheit.new(212)
+        celsius = Tempura::Celsius.new(101)
+        expect(fahrenheit < celsius).to be_true
+      end
 
-		it 'has <=' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(101)
-			expect(fahrenheit <= celsius).to be_true
-		end
+      it 'has <=' do
+        fahrenheit = Tempura::Fahrenheit.new(212)
+        celsius = Tempura::Celsius.new(101)
+        expect(fahrenheit <= celsius).to be_true
+      end
 
-		it 'has >=' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(99)
-			expect(fahrenheit >= celsius).to be_true
-		end
+      it 'has >=' do
+        fahrenheit = Tempura::Fahrenheit.new(212)
+        celsius = Tempura::Celsius.new(99)
+        expect(fahrenheit >= celsius).to be_true
+      end
 
-		it 'has ==' do
-			c = Tempura::Celsius.new(100)
-			d = Tempura::Delisle.new(0)
-			f = Tempura::Fahrenheit.new(212)
-			n = Tempura::Newton.new(33)
-			ra = Tempura::Rankine.new(671.67)
-			ré = Tempura::Réaumur.new(80)
-			rø = Tempura::Rømer.new(60)
+      it 'has ==' do
+        c = Tempura::Celsius.new(100)
+        d = Tempura::Delisle.new(0)
+        f = Tempura::Fahrenheit.new(212)
+        n = Tempura::Newton.new(33)
+        ra = Tempura::Rankine.new(671.67)
+        ré = Tempura::Réaumur.new(80)
+        rø = Tempura::Rømer.new(60)
 
-			scales = [c, d, f, n, ra, ré, rø]
-			scales.each { |s1|
-				scales.each { |s2|
-					expect(s1 == s2).to be_true
-				}
-			}
-		end
+        scales = [c, d, f, n, ra, ré, rø]
+        scales.each { |s1|
+          scales.each { |s2|
+            expect(s1 == s2).to be_true
+          }
+        }
+      end
+    end
+  end
 
-### Casting
+  describe 'casting to Numerics' do
 
     it 'casts to_f' do
       temp = Tempura::Fahrenheit.new(212)
@@ -137,10 +132,6 @@ Or install it yourself as:
       expect(temp.to_d).to be_a(BigDecimal)
     end
 
-## Contributing
+  end
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+end
