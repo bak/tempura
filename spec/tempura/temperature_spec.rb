@@ -54,7 +54,7 @@ describe Tempura::Temperature do
       c = Tempura::Celsius.new(100)
       r = Tempura::Rømer.new(60)
       k = Tempura::Kelvin.new(373.15)
-      result = ((f + c + r + k) / 4 ).to_delisle
+      result = ((f + c + r + k) / 4 ).to.delisle
       expect(result).to eq(0)
       expect(result).to be_a(Tempura::Delisle)
     end
@@ -64,8 +64,8 @@ describe Tempura::Temperature do
     it 'compares internal value' do
       fahrenheit = Tempura::Fahrenheit.new(212)
       celsius = Tempura::Celsius.new(101)
-      leg = fahrenheit <=> celsius
-      expect(leg).to eq(-1)
+      comp = fahrenheit <=> celsius
+      expect(comp).to eq(-1)
     end
 
     describe 'comparison operators' do
