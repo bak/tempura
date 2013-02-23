@@ -1,24 +1,30 @@
 # Tempura
 
-Tempura is a library for temperature math and conversion.
+Tempura is a library for temperature arithmetic, comparison, and conversion. Currently supported scales are Fahrenheit, Celsius, Kelvin, Delisle, Newton, Rankine, Réaumer, and Rømer.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'tempura'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install tempura
+Temperature objects may be instantiated directly, e.g. `Tempura::Celsius.new(100)`, or by using the methods defined on `Numeric`, e.g., `212.degrees_fahrenheit`
 
 ## Usage
 
+### Instantiation
+
+Direct instantiation:
+
+		Tempura::Fahrenheit.new(212)
+
+Via Numeric:
+
+		100.degrees_celsius
+
+### Conversion
+
+`Tempura::Temperature` (each scales parent object) implements `#to`, which returns a `Tempura::Conversion`, which then may receive the name of a scale to convert to:
+
+		212.degrees_fahrenheit.to.celsius #=> <Tempura::Celsius...
+
 ### Arithmetic
+
+Subtract other temperatures of any scale, or native degrees:
 
     it 'subtracts another temperature' do
       fahrenheit = Tempura::Fahrenheit.new(212)
@@ -35,6 +41,8 @@ Or install it yourself as:
       expect(result).to be_a(Tempura::Fahrenheit)
     end
 
+Add temperatures of any scale, or native degrees:
+
     it 'adds another temperature' do
       fahrenheit = Tempura::Fahrenheit.new(212)
       celsius = Tempura::Celsius.new(0)
@@ -50,17 +58,12 @@ Or install it yourself as:
       expect(result).to be_a(Tempura::Fahrenheit)
     end
 
+Divide a temperature by a numeric:
+
     it 'divides by a Numeric' do
       fahrenheit = Tempura::Fahrenheit.new(212)
       result = fahrenheit / 2
       expect(result).to eq(106)
-      expect(result).to be_a(Tempura::Fahrenheit)
-    end
-
-    it 'multiplies by a Numeric' do
-      fahrenheit = Tempura::Fahrenheit.new(212)
-      result = fahrenheit * 2
-      expect(result).to eq(424)
       expect(result).to be_a(Tempura::Fahrenheit)
     end
 
@@ -74,68 +77,61 @@ Or install it yourself as:
       expect(result).to be_a(Tempura::Delisle)
     end
 
+Multiply a temperature by a numeric:
+
+    it 'multiplies by a Numeric' do
+      fahrenheit = Tempura::Fahrenheit.new(212)
+      result = fahrenheit * 2
+      expect(result).to eq(424)
+      expect(result).to be_a(Tempura::Fahrenheit)
+    end
+
 ### Comparison
 
-		it 'has >' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(99)
-			expect(fahrenheit > celsius).to be_true
-		end
+`>`, `<`, `<=`, `>=`, `<=>`, and `==` are supported. Temperatures of the same or different scales may be compared, or a temperature may be compared with native degrees.
 
-		it 'has <' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(101)
-			expect(fahrenheit < celsius).to be_true
-		end
+    Tempura::Fahrenheit.new(212) > Tempura::Celsius.new(99)
+    Tempura::Fahrenheit.new(212) < Tempura::Celsius.new(101)
+    Tempura::Fahrenheit.new(212) >= Tempura::Celsius.new(99)
+    Tempura::Fahrenheit.new(212) <= Tempura::Celsius.new(101)
 
-		it 'has <=' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(101)
-			expect(fahrenheit <= celsius).to be_true
-		end
+    scales = [
+		  Tempura::Celsius.new(100),
+		  Tempura::Delisle.new(0),
+		  Tempura::Fahrenheit.new(212),
+		  Tempura::Newton.new(33),
+		  Tempura::Rankine.new(671.67),
+		  Tempura::Réaumur.new(80),
+		  Tempura::Rømer.new(60),
+		]
 
-		it 'has >=' do
-			fahrenheit = Tempura::Fahrenheit.new(212)
-			celsius = Tempura::Celsius.new(99)
-			expect(fahrenheit >= celsius).to be_true
-		end
-
-		it 'has ==' do
-			c = Tempura::Celsius.new(100)
-			d = Tempura::Delisle.new(0)
-			f = Tempura::Fahrenheit.new(212)
-			n = Tempura::Newton.new(33)
-			ra = Tempura::Rankine.new(671.67)
-			ré = Tempura::Réaumur.new(80)
-			rø = Tempura::Rømer.new(60)
-
-			scales = [c, d, f, n, ra, ré, rø]
-			scales.each { |s1|
-				scales.each { |s2|
-					expect(s1 == s2).to be_true
-				}
+		scales.all? { |s1|
+			scales.each { |s2|
+		    s1 == s2
 			}
-		end
+		}
+
+    #=> true
 
 ### Casting
 
-    it 'casts to_f' do
-      temp = Tempura::Fahrenheit.new(212)
-      expect(temp.to_f).to eq(212.0)
-      expect(temp.to_f).to be_a(Float)
-    end
+    Tempura::Fahrenheit.new(212).to_f
+    Tempura::Kelvin.new(373.15).to_i
+    Tempura::Celsius.new(100).to_d
 
-    it 'casts to_i' do
-      temp = Tempura::Kelvin.new(373.15)
-      expect(temp.to_i).to eq(373)
-      expect(temp.to_i).to be_a(Integer)
-    end
+## Installation
 
-    it 'casts to_d' do
-      temp = Tempura::Celsius.new(100)
-      expect(temp.to_d).to eq(100.0)
-      expect(temp.to_d).to be_a(BigDecimal)
-    end
+Add this line to your application's Gemfile:
+
+    gem 'tempura'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install tempura
 
 ## Contributing
 

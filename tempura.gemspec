@@ -18,7 +18,9 @@ Gem::Specification.new do |gem|
                         README.md
                         Rakefile
                         lib/tempura.rb
+                        lib/tempura/core_ext/numeric.rb
                         lib/tempura/celsius.rb
+                        lib/tempura/conversion.rb
                         lib/tempura/delisle.rb
                         lib/tempura/fahrenheit.rb
                         lib/tempura/kelvin.rb
@@ -30,6 +32,8 @@ Gem::Specification.new do |gem|
                         lib/tempura/version.rb
                         spec/spec_helper.rb
                         spec/tempura/celsius_spec.rb
+                        spec/tempura/conversion_spec.rb
+                        spec/tempura/core_ext_spec.rb
                         spec/tempura/delisle_spec.rb
                         spec/tempura/fahrenheit_spec.rb
                         spec/tempura/kelvin_spec.rb
