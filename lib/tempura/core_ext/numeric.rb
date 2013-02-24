@@ -1,13 +1,39 @@
+# encoding: utf-8
+
 class Numeric
 
-  Tempura::SCALES.each do |scale|
-    define_method("degrees_#{scale.downcase}".intern) do
-      Tempura.const_get(scale.intern).new(self)
-    end
+  def degrees_celsius
+    Tempura::Celsius.new(self)
   end
 
-  Tempura::ALIASES.each do |alt, canonical|
-    alias_method("degrees_#{alt}".intern, "degrees_#{canonical}".intern)
+  def degrees_delisle
+    Tempura::Delisle.new(self)
   end
+
+  def degrees_fahrenheit
+    Tempura::Fahrenheit.new(self)
+  end
+
+  def degrees_kelvin
+    Tempura::Kelvin.new(self)
+  end
+
+  def degrees_newton
+    Tempura::Newton.new(self)
+  end
+
+  def degrees_rankine
+    Tempura::Rankine.new(self)
+  end
+
+  def degrees_réaumur
+    Tempura::Réaumur.new(self)
+  end
+  alias :degrees_reaumur :degrees_réaumur
+
+  def degrees_rømer
+    Tempura::Rømer.new(self)
+  end
+  alias :degrees_romer :degrees_rømer
   
 end

@@ -1,18 +1,44 @@
+# encoding: utf-8
+
 class Tempura::Conversion
   
   def initialize(klass)
     @klass = klass
   end
 
-  Tempura::SCALES.each do |scale|
-    define_method(scale.downcase.intern) do
-      Tempura.const_get(scale.intern).new(klass)
-    end
+  def celsius
+    Tempura::Celsius.new(klass)
   end
 
-  Tempura::ALIASES.each do |alt, canonical|
-    alias_method(alt.intern, canonical.intern)
+  def delisle
+    Tempura::Delisle.new(klass)
   end
+
+  def fahrenheit
+    Tempura::Fahrenheit.new(klass)
+  end
+
+  def kelvin
+    Tempura::Kelvin.new(klass)
+  end
+
+  def newton
+    Tempura::Newton.new(klass)
+  end
+
+  def rankine
+    Tempura::Rankine.new(klass)
+  end
+
+  def réaumur
+    Tempura::Réaumur.new(klass)
+  end
+  alias :reaumur :réaumur
+
+  def rømer
+    Tempura::Rømer.new(klass)
+  end
+  alias :romer :rømer
 
   private
 
