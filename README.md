@@ -1,4 +1,7 @@
 # Tempura
+[![Build Status](https://secure.travis-ci.org/bak/tempura.png?branch=master)][travis]
+
+[travis]: http://travis-ci.org/bak/tempura
 
 Tempura is a library for temperature arithmetic, comparison, and conversion. Currently supported scales are Fahrenheit, Celsius, Kelvin, Delisle, Newton, Rankine, Réaumer, and Rømer.
 
