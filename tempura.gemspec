@@ -26,8 +26,8 @@ Gem::Specification.new do |gem|
                         lib/tempura/kelvin.rb
                         lib/tempura/newton.rb
                         lib/tempura/rankine.rb
-                        lib/tempura/réaumur.rb
-                        lib/tempura/rømer.rb
+                        lib/tempura/reaumur.rb
+                        lib/tempura/romer.rb
                         lib/tempura/temperature.rb
                         lib/tempura/version.rb
                         spec/spec_helper.rb
@@ -39,8 +39,8 @@ Gem::Specification.new do |gem|
                         spec/tempura/kelvin_spec.rb
                         spec/tempura/newton_spec.rb
                         spec/tempura/rankine_spec.rb
-                        spec/tempura/réaumur_spec.rb
-                        spec/tempura/rømer_spec.rb
+                        spec/tempura/reaumur_spec.rb
+                        spec/tempura/romer_spec.rb
                         spec/tempura/temperature_spec.rb
                         tempura.gemspec
                       )
