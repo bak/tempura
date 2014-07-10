@@ -49,7 +49,7 @@ describe Numeric do
       scales = [c, d, f, n, ra, ré, re, rø, ro]
       scales.each { |s1|
         scales.each { |s2|
-          expect(s1 == s2).to be_true
+          expect(s1 == s2).to be_truthy
         }
       }
     end

@@ -72,25 +72,25 @@ describe Tempura::Temperature do
       it 'has >' do
         fahrenheit = Tempura::Fahrenheit.new(212)
         celsius = Tempura::Celsius.new(99)
-        expect(fahrenheit > celsius).to be_true
+        expect(fahrenheit > celsius).to be_truthy
       end
 
       it 'has <' do
         fahrenheit = Tempura::Fahrenheit.new(212)
         celsius = Tempura::Celsius.new(101)
-        expect(fahrenheit < celsius).to be_true
+        expect(fahrenheit < celsius).to be_truthy
       end
 
       it 'has <=' do
         fahrenheit = Tempura::Fahrenheit.new(212)
         celsius = Tempura::Celsius.new(101)
-        expect(fahrenheit <= celsius).to be_true
+        expect(fahrenheit <= celsius).to be_truthy
       end
 
       it 'has >=' do
         fahrenheit = Tempura::Fahrenheit.new(212)
         celsius = Tempura::Celsius.new(99)
-        expect(fahrenheit >= celsius).to be_true
+        expect(fahrenheit >= celsius).to be_truthy
       end
 
       it 'has ==' do
@@ -105,7 +105,7 @@ describe Tempura::Temperature do
         scales = [c, d, f, n, ra, ré, rø]
         scales.each { |s1|
           scales.each { |s2|
-            expect(s1 == s2).to be_true
+            expect(s1 == s2).to be_truthy
           }
         }
       end
